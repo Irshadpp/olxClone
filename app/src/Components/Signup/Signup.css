@@ -35,4 +35,16 @@
     justify-content: center;
     cursor: pointer;
   }
+
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+
+  .a {
+    color: #002f34;
+  }
+  .a:hover{
+    text-decoration: none;
+  }
   

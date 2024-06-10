@@ -35,4 +35,10 @@
     justify-content: center;
     cursor: pointer;
   }
+  .a {
+    color: #002f34;
+  }
+  .a:hover{
+    text-decoration: none;
+  }
   

@@ -162,3 +162,15 @@
     display: none;
   }
 }
+
+.a {
+  text-decoration: none;
+  color: #002f34;
+}
+.a:hover{
+  text-decoration: none;
+}
+.logout{
+  cursor: pointer;
+  text-decoration: none;
+}

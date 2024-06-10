@@ -6,7 +6,15 @@ import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import { UserAuth } from '../../context/authContext';
+import { Link, useNavigate } from 'react-router-dom';
 function Header() {
+  const navigate = useNavigate()
+  const {user, logout} = UserAuth();
+  const handleLogout = () =>{
+    logout();
+    navigate('/login');
+  }
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -30,11 +38,24 @@ function Header() {
           </div>
         </div>
         <div className="language">
-          <span> ENGLISH </span>
-          <Arrow></Arrow>
+          {
+            user ? (
+              <span>{user?.displayName}</span>
+            ) : (
+              <span>ENGLISH <Arrow> </Arrow></span>
+            )
+          }
+            {/* <span> { user ? user?.displayName : "ENGLISH"  (<Arrow> </Arrow>) } </span> */}
+         
         </div>
         <div className="loginPage">
-          <span>Login</span>
+          {
+            user ? (
+              <span className='logout' onClick={handleLogout}>Logout</span>
+            ) : (
+              <span><Link className='a' to="/login">Login</Link></span>
+            )
+          }
           <hr />
         </div>
 
