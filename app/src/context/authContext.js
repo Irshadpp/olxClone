@@ -1,11 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth,db } from "../firebase/firebase";
+import { auth,db, storage } from "../firebase/firebase";
+import { ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {doc, setDoc} from 'firebase/firestore'
 import { getErrorMessage } from "../util/errorMessages";
 
 const AuthContext = createContext();
 
+
+const uploadImage = async (file) => {
+    if (!file) throw new Error('No file provided for upload');
+    
+    const storageRef = ref(storage, `images/${file.name}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+  
+    return downloadURL;
+  };
 
 export const AuthContextProvider = ({children}) =>{
 
@@ -51,8 +62,30 @@ export const AuthContextProvider = ({children}) =>{
         }
     }
 
+     const submitProduct = async (name, category, price, imageFile) => {
+        try {
+          const imageURL = await uploadImage(imageFile);
+      
+          const productData = {
+            name,
+            category,
+            price,
+            imageUrl: imageURL,
+            userId: user.uid,
+            createdAt: new Date(),
+          };
+      
+          const productRef = doc(db, 'products', name);
+          await setDoc(productRef, productData);
+      
+          return 'Product submitted successfully';
+        } catch (error) {
+            console.log(error)
+          throw new Error(`Failed to submit product: ${getErrorMessage(error.code)}`);
+        }
+      };
 
-    return <AuthContext.Provider value={{user, signup, login, logout}}>
+    return <AuthContext.Provider value={{user, signup, login, logout, submitProduct}}>
         {children}
     </AuthContext.Provider>
 }

@@ -3,7 +3,7 @@ import {UserAuth} from '../../context/authContext'
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { validateForm } from '../../util/validate';
+import { validateSignupForm } from '../../util/validate';
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ export default function Signup() {
   const {signup} = UserAuth()
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    const validationError = validateForm(
+    const validationError = validateSignupForm(
       name.current.value,
       email.current.value,
       password.current.value,
