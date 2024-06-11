@@ -1,18 +1,18 @@
 export const validateSignupForm = (username, email, password, phone) => {
-    if (!username) {
+    if (!username || username.trim() === '' ) {
       return 'Username is required';
     }
-    if (!email) {
+    if (!email || email.trim() === '') {
       return 'Email is required';
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return 'Invalid email address';
     }
-    if (!phone) {
+    if (!phone || phone.trim() === '') {
       return 'Phone number is required';
     }
-    if (!password) {
+    if (!password || password.trim() === '') {
       return 'Password is required';
     }
     if (password.length < 6) {

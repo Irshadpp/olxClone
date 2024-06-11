@@ -31,6 +31,7 @@ export default function Signup() {
       await signup(name.current.value, email.current.value,password.current.value, phone.current.value );
       navigate('/login');
     } catch (error) {
+      console.log(error.message)
       setErrorMessage(error.message);
     }
    

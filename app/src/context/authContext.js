@@ -42,7 +42,8 @@ export const AuthContextProvider = ({children}) =>{
               phone,
             });
           } catch (error) {
-            throw new Error(getErrorMessage(error.code))
+            console.log(error)
+            throw new Error(getErrorMessage(error.code));
           }
     }
 
