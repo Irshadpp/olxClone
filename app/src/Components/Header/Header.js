@@ -45,7 +45,6 @@ function Header() {
               <span>ENGLISH <Arrow> </Arrow></span>
             )
           }
-            {/* <span> { user ? user?.displayName : "ENGLISH"  (<Arrow> </Arrow>) } </span> */}
          
         </div>
         <div className="loginPage">
@@ -53,12 +52,12 @@ function Header() {
             user ? (
               <span className='logout' onClick={handleLogout}>Logout</span>
             ) : (
-              <span><Link className='a' to="/login">Login</Link></span>
+             <Link  to="/login"><span className='a'>Login</span></Link>
             )
           }
-          <hr />
         </div>
 
+        <Link to="/create">
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
@@ -66,6 +65,7 @@ function Header() {
             <span>SELL</span>
           </div>
         </div>
+        </Link>
       </div>
     </div>
   );

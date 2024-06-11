@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth,db, storage } from "../firebase/firebase";
+import { auth,db, storage, } from "../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL} from 'firebase/storage'
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, addDoc, collection} from 'firebase/firestore'
 import { getErrorMessage } from "../util/errorMessages";
 
 const AuthContext = createContext();
@@ -75,7 +75,7 @@ export const AuthContextProvider = ({children}) =>{
             createdAt: new Date(),
           };
       
-          const productRef = doc(db, 'products', name);
+          const productRef = await addDoc(collection(db, 'products'), productData);
           await setDoc(productRef, productData);
       
           return 'Product submitted successfully';

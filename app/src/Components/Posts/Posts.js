@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {db} from '../../firebase/firebase';
 import {collection,getDocs} from 'firebase/firestore'
 import Heart from '../../assets/Heart';
 import './Post.css';
 import { Timestamp } from 'firebase/firestore';
+import { PostContext } from '../../context/PostContext';
+import { useNavigate } from 'react-router-dom';
 
 function Posts() {
 
+  const navigate = useNavigate()
+  const {postDetails,setPostDetails} = useContext(PostContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -41,6 +45,12 @@ function Posts() {
     fetchProducts();
   }, []);
 
+ const handleCardClick = (products) =>{
+  setPostDetails(products);
+  console.log(postDetails)
+  navigate('/view');
+ }
+
   return (
     <div className="postParentDiv">
       <div className="moreView">
@@ -48,11 +58,12 @@ function Posts() {
           <span>Quick Menu</span>
           <span>View more</span>
         </div>
-
+        <div className="cards">
         {
           products.map((product) =>
-            <div key={product.id} className="cards">
           <div
+          key={product.id}
+          onClick={()=>handleCardClick(product)}
             className="card"
           >
             <div className="favorite">
@@ -70,10 +81,9 @@ function Posts() {
               <span>{formatDate(product.createdAt)}</span>
             </div>
           </div>
-        </div>
           )
-        }
-        
+          }
+        </div>
       </div>
       <div className="recommendations">
         <div className="heading">

@@ -12,8 +12,10 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {login} = UserAuth()
+  const {login, user} = UserAuth()
 
+  if(user) return navigate('/');
+  
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try {   

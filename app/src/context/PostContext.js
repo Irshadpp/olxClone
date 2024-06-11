@@ -1,11 +1,13 @@
-import { createContext ,useState} from "react";
+import { createContext, useState, useEffect } from 'react';
 
+export const PostContext = createContext();
 
-const PostContext = createContext();
+export const PostContextProvider = ({ children }) => {
+  const [postDetails, setPostDetails] = useState(null);;
 
-export const PostContextProvider = ({children}) =>{
-    const [postDetails,setPostDetails] = useState()
-    return <PostContext.Provider value={{postDetails}}>
-        {children}
+  return (
+    <PostContext.Provider value={{ postDetails, setPostDetails }}>
+      {children}
     </PostContext.Provider>
-}
+  );
+};

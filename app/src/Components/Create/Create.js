@@ -15,8 +15,6 @@ const Create = () => {
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    console.log(name, category, price, image);
-    console.log("name");
     setSuccessMessage('');
     const formErrors = validateCreateForm(name, category, price);
     if(formErrors){
