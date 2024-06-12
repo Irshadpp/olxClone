@@ -14,7 +14,7 @@ function App() {
   const appRouter = createBrowserRouter([
     {
       path:"/",
-      element: <Home/>
+      element:<Home />
     },
     {
       path:"login",
@@ -26,7 +26,11 @@ function App() {
     },
     {
       path:"/create",
-      element:<Create/>
+      element:(
+        <ProtectedRoute>
+          <Create/>
+        </ProtectedRoute>
+      ),
     },
     {
       path:"/view",

@@ -13,6 +13,7 @@ function Home(props) {
   const navigate = useNavigate();
 
   const {user} = UserAuth()
+  
 
   return (
     <div className="homeParentDiv">
